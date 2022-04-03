@@ -1,5 +1,26 @@
 <?php
     session_start();
+    include("../Database/config.php");
+
+    $query = "select * from user_profile where NIK='".$_SESSION['login_nik']."'";
+    $data_query = mysqli_query($check_connection_status, $query);
+    $data = mysqli_fetch_array($data_query);
+
+    $_SESSION['first_name']=$data['first_name'];
+    $_SESSION['middle_name']=$data['middle_name'];
+    $_SESSION['last_name']=$data['last_name'];
+    $_SESSION['birth_place']=$data['birth_place'];
+    $_SESSION['birth_date']=$data['birth_date'];
+    $_SESSION['nationality_number']=$data['NIK'];
+    $_SESSION['nationality']=$data['nationality'];
+    $_SESSION['email']=$data['email'];
+    $_SESSION['phone_number']=$data['phone_number'];
+    $_SESSION['address']=$data['address'];
+    $_SESSION['postal_code']=$data['postal_code'];
+    $_SESSION['pfp']=$data['pfp'];
+    $_SESSION['username']=$data['username'];
+    $_SESSION['pw1']=$data['password1'];
+    $_SESSION['pw2']=$data['password2'];;
 ?>
 
 <!DOCTYPE html>
@@ -8,35 +29,34 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Edit Profile</title>
 </head>
 <body>
-    <!-- register title -->
-    <div class="title">
-        <?php
-            echo "Register";
-        ?>
+    <div class="header">
+        <div class="header-left">
+            Aplikasi Pengelolaan Keuangan
+        </div>
+
+        <div class="header-center">
+            <a class="home-text" href="../HomePage/home.php">Home</a>
+            <a class="profile-text" href="../ProfilePage/profile.php">Profile</a>
+            <a class="edit-text" href="../ProfilePage/EditProfile.php">Edit Profile</a>
+        </div>
+
+        <div class="header-right">
+            <a href="../LogoutPage/logout.php">Logout</a>
+        </div>
     </div>
 
     <?php
-        if($_SESSION['validation'] == 0) {
-            $_SESSION['first_name_validation'] = $_SESSION['middle_name_validation'] = $_SESSION['last_name_validation'] = 
-            $_SESSION['birth_place_validation'] = $_SESSION['birth_date_validation'] = $_SESSION['nationality_number_validation'] = 
-            $_SESSION['nationality_validation'] = $_SESSION['email_validation'] = $_SESSION['phone_number_validation'] = 
-            $_SESSION['address_validation'] = $_SESSION['postal_code_validation'] = $_SESSION['pfp_validation'] = 
-            $_SESSION['username_validation'] = $_SESSION['pw1_validation'] = $_SESSION['pw2_validation'] = "";
+        $query = "select * from user_profile";
+        $data_query = mysqli_query($check_connection_status, $query);
+        $data = mysqli_fetch_array($data_query);
+    ?>
 
-            $_SESSION['first_name'] = $_SESSION['middle_name'] = $_SESSION['last_name'] = 
-            $_SESSION['birth_place'] = $_SESSION['birth_date'] = $_SESSION['nationality_number'] = 
-            $_SESSION['nationality'] = $_SESSION['email'] = $_SESSION['phone_number'] = 
-            $_SESSION['address'] = $_SESSION['postal_code'] = $_SESSION['pfp'] = 
-            $_SESSION['username'] = $_SESSION['pw1'] = $_SESSION['pw2'] = "";
-        }        
-    ?> 
-
-     <!-- formulir container -->
-     <div class="formulir-container">
-        <form action="register_process.php" method="post" enctype="multipart/form-data">
+    <div class="content">
+        <span>Edit Profil Pribadi</span>
+        <form action="edit_profile_validation.php" method="post" enctype="multipart/form-data">
             <table class="formulir" style="width: 100%">
                 <tr>
                     <th style="width: 8vw;"> </th>
@@ -48,35 +68,35 @@
                 </tr>
                 <tr style="height: 1vw;">
                     <td>Nama Depan</td>
-                    <td><input type="text" name="first_name" id="first_name" value="<?php echo $_SESSION['first_name']; ?>"></td>
+                    <td><?php echo $_SESSION['first_name']; ?></td>
                     <td>Nama Tengah</td>
-                    <td><input type="text" name="middle_name" id="middle_name" value="<?php echo $_SESSION['middle_name']; ?>"></td>
+                    <td><?php echo $_SESSION['middle_name'];; ?></td>
                     <td>Nama Belakang</td>
-                    <td><input type="text" name="last_name" id="last_name" value="<?php echo $_SESSION['last_name']; ?>"></td>
+                    <td><?php echo $_SESSION['last_name'];; ?></td>
                 </tr>
                 <tr style="height: 2vw;">
                     <td> </td>
-                    <td class="error"><?php echo $_SESSION['first_name_validation']?></td>
                     <td> </td>
-                    <td class="error"><?php echo $_SESSION['middle_name_validation']?></td>
                     <td> </td>
-                    <td class="error"><?php echo $_SESSION['last_name_validation']?></td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
                 </tr>
                 <tr style="height: 1vw;">
                     <td>Tempat Lahir</td>
-                    <td><input type="text" name="birth_place" id="birth_place" value="<?php echo $_SESSION['birth_place']; ?>"></td>
+                    <td><?php echo $_SESSION['birth_place']; ?></td>
                     <td>Tgl Lahir</td>
-                    <td><input type="date" name="birth_date" id="birth_date" value="<?php echo $_SESSION['birth_date']; ?>"></td>
+                    <td><?php echo $_SESSION['birth_date']; ?></td>
                     <td>NIK</td>
-                    <td><input type="text" name="nationality_number" id="nationality_number" value="<?php echo $_SESSION['nationality_number']; ?>"></td>
+                    <td><?php echo $_SESSION['nationality_number']; ?></td>
                 </tr>
                 <tr style="height: 2vw;">
                     <td> </td>
-                    <td class="error"><?php echo $_SESSION['birth_place_validation']?></td>
                     <td> </td>
-                    <td class="error"><?php echo $_SESSION['birth_date_validation']?></td>
                     <td> </td>
-                    <td class="error"><?php echo $_SESSION['nationality_number_validation']?></td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
                 </tr>
                 <tr style="height: 1vw;">
                     <td>Warga Negara</td>
@@ -96,17 +116,22 @@
                 </tr>
                 <tr style="height: 1vw;">
                     <td>Alamat</td>
-                    <td><textarea name="address" id="address" cols="20" rows="4" value="<?php echo $_SESSION['address']; ?>"></textarea></td>
+                    <td><textarea name="address" id="address" cols="20" rows="4"><?php echo $_SESSION['address']; ?></textarea></td>
                     <td>Kode Pos</td>
                     <td><input type="text" name="postal_code" id="postal_code" value="<?php echo $_SESSION['postal_code']; ?>"></td>
                     <td>Foto Profil</td>
-                    <td><input type="file" name="pfp" id="pfp"></td>
+                    <td>
+                        <img src="../profile_picture/<?php echo $_SESSION['pfp'];?>" width="100"><br>
+                        <input type="file" name="pfp" id="pfp">
+                    </td>
                 </tr>
                 <tr style="height: 2vw;">
                     <td> </td>
                     <td class="error"><?php echo $_SESSION['address_validation']?></td>
                     <td> </td>
                     <td class="error"><?php echo $_SESSION['postal_code_validation']?></td>
+                    <td></td>
+                    <td></td>
                 </tr>
                 <tr style="height: 1vw;">
                     <td>Username</td>
@@ -127,12 +152,12 @@
             </table>
 
             <div class="button">
-                <a href="index.php">Kembali</a>
-                <input type='submit' name='register' value='Register'>
-                
+                <input type='submit' name='update' value='Update'>
+                <a href="../ProfilePage/profile.php">Cancel</a>
             </div>
         </form>
     </div>
+
 
     <style>
         *{
@@ -140,15 +165,71 @@
             padding: 0;
         }
 
-        body{
-            background-color: #c8f4f4;
+        .header{
+            background-color: #f9ffca;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            padding: 1em 0;
+        }
+        
+        .header-left{
+            margin-left: 2vw;
         }
 
-        .title{
+        .header-center{
+            margin-left: 40vw;
+        }
+
+        .header-center a{
+            margin-left: 4vw;
+            color: black;
+        }
+
+        .home-text{
+            text-decoration: none;
+        }
+
+        .profile-text{
+            text-decoration: none;
+        }
+
+        .header-right{
+            margin-left: 15vw;
+            margin-right: 2vw;
+        }
+
+        .header-right a{
+            text-decoration: none;
+            color: black;
+        }
+
+        body{
+            background-color: #cad1ff;
+        }
+
+        .content{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content span{
+            font-weight: bold;
             text-align: center;
-            font-size: 3vw;
-            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-            padding: 3vw;
+            padding: 1vw 0;
+            font-size: 1.5em;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            margin-top: 2vw;
+            margin-bottom: 1vw;
+        }
+
+        .content table{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         .formulir{
@@ -171,7 +252,7 @@
             justify-content: right;
             gap: 2em;
             margin-right: 10vw;
-            margin-top: 2vw;
+            margin-top: 1vw;
             font-size: 0.8em;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
         }
@@ -200,5 +281,6 @@
             font-family: Arial, Helvetica, sans-serif;
         }
     </style>
+    
 </body>
 </html>

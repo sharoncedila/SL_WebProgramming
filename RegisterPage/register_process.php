@@ -1,5 +1,6 @@
 <?php
     session_start();        
+    include("../Database/config.php");
 
         if($_SERVER["REQUEST_METHOD"] == "POST") {
             $_POST['counter'] = 0;
@@ -126,8 +127,8 @@
                 $_SESSION['address'] = $_POST['address'];
                 $_SESSION['postal_code'] = $_POST['postal_code'];
                 $_SESSION['username'] = $_POST['username'];
-                $_SESSION['pw1'] = $_POST['pw1'];
-                $_SESSION['pw2'] = $_POST['pw2'];
+                $_SESSION['password1'] = $_POST['pw1'];
+                $_SESSION['password2'] = $_POST['pw2'];
     
                 $_SESSION['pfp'] = $_FILES['pfp']['name'];
                 $profile_temp_name = $_FILES['pfp']['tmp_name'];
@@ -135,12 +136,11 @@
                 $_SESSION['upload'] = move_uploaded_file($profile_temp_name, $destination_folder.$_SESSION['pfp']);
                 
                 echo "<script>
-                    alert('Akun anda berhasil diregistrasi! Please login your account!');
-                    document.location.href = 'index.php';
+                    document.location.href = '../RegisterPage/register_database.php';
                     </script>";
             } else { 
                 $_SESSION['validation'] = 1;
-                header("location:register.php");
+                header("location:../RegisterPage/register.php");
             }
         } 
   

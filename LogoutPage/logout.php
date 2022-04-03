@@ -4,8 +4,6 @@
 
     echo "<script>
         alert('Your account successfully logout!');
-        document.location.href = 'index.php';
+        document.location.href = '../WelcomePage/index.php';
         </script>";
-    
-    
 ?>

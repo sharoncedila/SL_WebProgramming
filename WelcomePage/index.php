@@ -1,5 +1,18 @@
 <?php
     session_start();
+        
+    $_SESSION['first_name_validation'] = $_SESSION['middle_name_validation'] = $_SESSION['last_name_validation'] = 
+    $_SESSION['birth_place_validation'] = $_SESSION['birth_date_validation'] = $_SESSION['nationality_number_validation'] = 
+    $_SESSION['nationality_validation'] = $_SESSION['email_validation'] = $_SESSION['phone_number_validation'] = 
+    $_SESSION['address_validation'] = $_SESSION['postal_code_validation'] = $_SESSION['pfp_validation'] = 
+    $_SESSION['username_validation'] = $_SESSION['pw1_validation'] = $_SESSION['pw2_validation'] = "";
+
+    $_SESSION['first_name'] = $_SESSION['middle_name'] = $_SESSION['last_name'] = 
+    $_SESSION['birth_place'] = $_SESSION['birth_date'] = $_SESSION['nationality_number'] = 
+    $_SESSION['nationality'] = $_SESSION['email'] = $_SESSION['phone_number'] = 
+    $_SESSION['address'] = $_SESSION['postal_code'] = $_SESSION['pfp'] = 
+    $_SESSION['username'] = $_SESSION['pw1'] = $_SESSION['pw2'] = "";
+
 ?>
 
 <!DOCTYPE html>
@@ -31,12 +44,12 @@
     <div class="button-login-register">
         <div class="button-login">
             <?php 
-                echo "<a href='login.php'>Login</a>";
+                echo "<a href='../LoginPage/login.php'>Login</a>";
             ?>
         </div>
         <div class="button-register">
             <?php 
-                echo "<a href='register.php'>Register</a>";
+                echo "<a href='../RegisterPage/register.php'>Register</a>";
             ?>
         </div>
     </div>

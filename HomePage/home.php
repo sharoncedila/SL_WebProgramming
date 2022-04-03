@@ -1,5 +1,6 @@
 <?php
     session_start();
+    include("../Database/config.php");
 ?>
 
 <!DOCTYPE html>
@@ -17,12 +18,12 @@
         </div>
 
         <div class="header-center">
-            <a class="home-text" href="home.php">Home</a>
-            <a class="profile-text" href="profile.php">Profile</a>
+            <a class="home-text" href="../HomePage/home.php">Home</a>
+            <a class="profile-text" href="../ProfilePage/profile.php">Profile</a>
         </div>
 
         <div class="header-right">
-            <a href="logout.php">Logout</a>
+            <a href="../LogoutPage/logout.php">Logout</a>
         </div>
     </div>
 
@@ -30,7 +31,6 @@
         <?php
             echo "Halo"." ";
         ?>
-            <b><?php echo " ".$_SESSION['first_name']." ".$_SESSION['middle_name']." ".$_SESSION['last_name']; ?></b>
         <?php 
             echo ", Selamat datang di Aplikasi Pengelolaan Keuangan";
         ?>

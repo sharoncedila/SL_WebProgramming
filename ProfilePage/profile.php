@@ -1,5 +1,12 @@
 <?php
     session_start();
+    include("../Database/config.php");
+
+    $_SESSION['first_name_validation'] = $_SESSION['middle_name_validation'] = $_SESSION['last_name_validation'] = 
+    $_SESSION['birth_place_validation'] = $_SESSION['birth_date_validation'] = $_SESSION['nationality_number_validation'] = 
+    $_SESSION['nationality_validation'] = $_SESSION['email_validation'] = $_SESSION['phone_number_validation'] = 
+    $_SESSION['address_validation'] = $_SESSION['postal_code_validation'] = $_SESSION['pfp_validation'] = 
+    $_SESSION['username_validation'] = $_SESSION['pw1_validation'] = $_SESSION['pw2_validation'] = "";
 ?>
 
 <!DOCTYPE html>
@@ -8,7 +15,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Profile</title>
 </head>
 <body>
     <div class="header">
@@ -17,14 +24,21 @@
         </div>
 
         <div class="header-center">
-            <a class="home-text" href="home.php">Home</a>
-            <a class="profile-text" href="profile.php">Profile</a>
+            <a class="home-text" href="../HomePage/home.php">Home</a>
+            <a class="profile-text" href="../ProfilePage/profile.php">Profile</a>
+            <a class="edit-text" href="../ProfilePage/EditProfile.php">Edit Profile</a>
         </div>
 
         <div class="header-right">
-            <a href="logout.php">Logout</a>
+            <a href="../LogoutPage/logout.php">Logout</a>
         </div>
     </div>
+
+    <?php
+        $query = "select * from user_profile where NIK='".$_SESSION['login_nik']."'";
+        $data_query = mysqli_query($check_connection_status, $query);
+        $data = mysqli_fetch_array($data_query);
+    ?>
 
     <div class="content">
         <span>Profil Pribadi</span>
@@ -39,35 +53,35 @@
                 </tr>
                 <tr style="height: 2.5vw;">
                     <td>Nama Depan</td>
-                    <td><b><?php echo $_SESSION['first_name']; ?></b></td>
+                    <td><b><?php echo $data['first_name']; ?></b></td>
                     <td>Nama Tengah</td>
-                    <td><b><?php echo $_SESSION['middle_name']; ?></b></td>
+                    <td><b><?php echo $data['middle_name']; ?></b></td>
                     <td>Nama Belakang</td>
-                    <td><b><?php echo $_SESSION['last_name']; ?></b></td>
+                    <td><b><?php echo $data['last_name']; ?></b></td>
                 </tr>
                 <tr style="height: 2.5vw;">
                     <td>Tempat Lahir</td>
-                    <td><b><?php echo $_SESSION['birth_place']; ?></b></td>
+                    <td><b><?php echo $data['birth_place']; ?></b></td>
                     <td>Tgl Lahir</td>
-                    <td><b><?php echo $_SESSION['birth_date']; ?></b></td>
+                    <td><b><?php echo $data['birth_date']; ?></b></td>
                     <td>NIK</td>
-                    <td><b><?php echo $_SESSION['nationality_number']; ?></b></td>
+                    <td><b><?php echo $data['NIK']; ?></b></td>
                 </tr>
                 <tr style="height: 2.5vw;">
                     <td>Warga Negara</td>
-                    <td><b><?php echo $_SESSION['nationality']; ?></b></td>
+                    <td><b><?php echo $data['nationality']; ?></b></td>
                     <td>Email</td>
-                    <td><b><?php echo $_SESSION['email']; ?></b></td>
+                    <td><b><?php echo $data['email']; ?></b></td>
                     <td>No HP</td>
-                    <td><b><?php echo $_SESSION['phone_number']; ?></b></td>
+                    <td><b><?php echo $data['phone_number']; ?></b></td>
                 </tr>
                 <tr style="height: 2.5vw;">
                     <td>Alamat</td>
-                    <td><b><?php echo $_SESSION['address']; ?></b></td>
+                    <td><b><?php echo $data['address']; ?></b></td>
                     <td>Kode Pos</td>
-                    <td><b><?php echo $_SESSION['postal_code']; ?></b></td>
+                    <td><b><?php echo $data['postal_code']; ?></b></td>
                     <td>Foto Profil</td>
-                    <td><img src="./profile_picture/<?php echo $_SESSION['pfp'];?>" width="100"></td>
+                    <td><img src="../profile_picture/<?php echo $data['pfp'];?>" width="100"></td>
                 </tr>   
             </table>
     </div>
@@ -88,7 +102,7 @@
         }
         
         .header-left{
-            margin-left: -3vw;
+            margin-left: 2vw;
         }
 
         .header-center{
@@ -104,9 +118,13 @@
             text-decoration: none;
         }
 
+        .edit-text{
+            text-decoration: none;
+        }
+
         .header-right{
-            margin-left: 20vw;
-            margin-right: -3vw;
+            margin-left: 15vw;
+            margin-right: 2vw;
         }
 
         .header-right a{

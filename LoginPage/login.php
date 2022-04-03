@@ -28,7 +28,7 @@
 
             <div class="button">
                 <input type="submit" name="login" value="Login">
-                <a href="index.php">Kembali</a>
+                <a href="../WelcomePage/index.php">Kembali</a>
         </form>
     </div>
 
